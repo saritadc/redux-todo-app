@@ -1,19 +1,22 @@
-import { ADD_TODO, LIST_TODO } from './action'
+import { ADD_TODO, SET_TODO_DATA } from "./action";
 
 const initialState = {
   todos: []
 }
 
 
-export const todoAppReducer = (state = initialState, action) =>  {
+const todoAppReducer = (state = initialState, action) =>  {
+  console.log(action)
   switch (action.type) {
     case ADD_TODO:
-      return {...state, todos: [...state.todos, action.todo]}
+      return { ...state, todos: [...state.todos, action.todo] };
 
-    case LIST_TODO:
-      return {...state, number: action.payload}
+    case SET_TODO_DATA:
+      return { ...state, todos: action.payload };
 
     default:
       return state;
   }
 }
+
+export default todoAppReducer;

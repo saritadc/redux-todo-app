@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {setTodoData} from '../../redux/action'
 
 class AddToDo extends React.Component {
   constructor(props) {
@@ -15,6 +17,10 @@ class AddToDo extends React.Component {
     this.deleteItem = this.deleteItem.bind(this);
     this.setUpdate = this.setUpdate.bind(this);
   }
+
+ componentDidMount(){
+  this.props.setTodoData([1])
+ }
 
   handleInput(e) {
     this.setState({
@@ -51,8 +57,8 @@ class AddToDo extends React.Component {
   setUpdate(text, key) {
     const items = this.state.items;
     items.map((item) => {
-      if (item.key === key) {
-        item.text = text;
+      if (items.key === key) {
+        items.text = text;
       }
     });
     this.setState({
@@ -61,6 +67,7 @@ class AddToDo extends React.Component {
   }
 
   render() {
+    console.log(this.props.todos)
     return (
       <div className="todo-container">
         <h1>My To Do List</h1>
@@ -73,14 +80,22 @@ class AddToDo extends React.Component {
           />
           <button type="submit">Add</button>
         </form>
-        <ListItems
+        {/* <ListItems
           items={this.state.items}
           deleteItem={this.deleteItem}
           setUpdate={this.setUpdate}
-        ></ListItems>
+        ></ListItems> */}
       </div>
     );
   }
 }
 
-export default ToDo;
+const mapStateToProps = (state) => ({
+  todos: state.todos
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setTodoData: (todos) => dispatch(setTodoData(todos)),
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddToDo);
