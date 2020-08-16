@@ -1,21 +1,21 @@
 export const ADD_TODO = 'ADD_TODO'
-export const SET_TODO_DATA = "SET_TODO_DATA";
+// export const SET_TODO_DATA = "SET_TODO_DATA";
 
 
-export const addTodo = (text) => {
+export const addTodo = (todos) => {
   return { 
     type: ADD_TODO, 
-    payload: text
+    payload: todos
   }
 }
 
-export const setTodoData = (todos) =>
-{
-  return { 
-    type: SET_TODO_DATA, 
-    payload: todos 
-  }
-}
+// export const listTodo = (todos) =>
+// {
+//   return { 
+//     type: SET_TODO_DATA, 
+//     payload: todos 
+//   }
+// }
 
 
 

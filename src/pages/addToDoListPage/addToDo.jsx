@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setTodoData} from '../../redux/action'
+import { Link } from 'react-router-dom';
+
+import {addTodo} from '../../redux/action';
 
 class AddToDo extends React.Component {
   constructor(props) {
@@ -14,12 +16,10 @@ class AddToDo extends React.Component {
     };
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-    this.setUpdate = this.setUpdate.bind(this);
   }
 
  componentDidMount(){
-  this.props.setTodoData([1])
+   this.props.addTodo([1])
  }
 
   handleInput(e) {
@@ -33,7 +33,7 @@ class AddToDo extends React.Component {
 
   addItem(e) {
     e.preventDefault();
-    const newItem = this.state.currentItem;
+    const newItem = this.props.addTodo(this.state.currentItem.text);
     console.log(newItem);
     if (newItem.text !== "") {
       const newItems = [...this.state.items, newItem];
@@ -47,24 +47,6 @@ class AddToDo extends React.Component {
     }
   }
 
-  deleteItem(key) {
-    const filteredItems = this.state.items.filter((item) => item.key !== key);
-    this.setState({
-      items: filteredItems,
-    });
-  }
-
-  setUpdate(text, key) {
-    const items = this.state.items;
-    items.map((item) => {
-      if (items.key === key) {
-        items.text = text;
-      }
-    });
-    this.setState({
-      items: items,
-    });
-  }
 
   render() {
     console.log(this.props.todos)
@@ -80,22 +62,14 @@ class AddToDo extends React.Component {
           />
           <button type="submit">Add</button>
         </form>
-        {/* <ListItems
-          items={this.state.items}
-          deleteItem={this.deleteItem}
-          setUpdate={this.setUpdate}
-        ></ListItems> */}
+        <Link to='/todolist'>CLick to see list</Link>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  todos: state.todos
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  setTodoData: (todos) => dispatch(setTodoData(todos)),
+  addTodo: (todos) => dispatch(addTodo(todos)),
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddToDo);
+export default connect(null,mapDispatchToProps)(AddToDo);
