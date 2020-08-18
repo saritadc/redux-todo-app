@@ -1,34 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-dom'
+import routes from '../../constants/routes';
 
 class ListItems extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [],
-      currentItem:[{
-        text: "",
-        key: "",
-      }]
-    }
-    
-  };
 
   render(){
-    const todos = this.props.todos
+    const todos = this.props.todos;
     console.log(todos, "abc")
   return(
   <div>
-
+    <h2>Todo List</h2>
+    <p>
     {
-      todos.map(todo => <div>{todos}</div>)
+      todos.map(todo => <div>{todo}</div>)
     }
-    <p>"Hello world"</p>
-    <Link to='/addtodo'>CLick to see list</Link>
+    </p>
+    <p>Hello</p>
+    <Link to={routes.ADD_TODO}>Return to add items</Link>
   </div>
 
-  );
+   );
   }
 }
 
@@ -37,4 +29,5 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps)(ListItems);
+const listItems = connect(mapStateToProps)(ListItems);
+export default listItems;

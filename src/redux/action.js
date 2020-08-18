@@ -2,10 +2,10 @@ export const ADD_TODO = 'ADD_TODO'
 // export const SET_TODO_DATA = "SET_TODO_DATA";
 
 
-export const addTodo = (todos) => {
+export const addTodo = (todo) => {
   return { 
     type: ADD_TODO, 
-    payload: todos
+    payload: todo
   }
 }
 
